@@ -2,13 +2,13 @@
 usage:
 	python simple_display.py <filename> [-a] [-d=<depth>] [-p=<path>] [-m=<map_path>]
 
+ - `-h` : print this help message and exit (can be anywhere)
  - `filename` : hdf5 file to open
  - `-a`	: if flag passed, print attributes as well
  - `-d` : argument is maximum depth. defaults to 64
  - `-p` : argument is specific path within the file
  - `-m` : argument is path (in hdf5 file) of group whose 
             attributes map types to shorted typenames
- - `-h` : print this help message and exit
 
 first prints datatype legend (if -m specified), surrounded by '=' hrules
 
@@ -59,10 +59,8 @@ def main(argv = sys.argv):
 	if (len(argv) < 2):
 		raise Exception(f'improper number of arguments.\n\n\n{__doc__}\n\n')
 	
-
 	# filename always first arg
 	filename = argv[1]
-
 	
 	# parse the rest
 	args = read_cmd(argv[2:])

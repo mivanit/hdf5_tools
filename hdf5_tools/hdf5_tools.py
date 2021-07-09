@@ -259,7 +259,7 @@ def print_info(
         attr_path_lengths = []
         for x in info:
             if x.etype in ['Dataset', 'Group']:
-                for a in data[x.path].attrs
+                for a in data[x.path].attrs:
                     attr_path_lengths.append(len(a))
 
         if not attr_path_lengths:
