@@ -44,6 +44,19 @@ $ h5view data_example.h5
  spectrograms : Dataset     float32         s=(10, 1000, 65)
 ```
 
+```bash
+$ h5view data_example.h5 -a
+--------------------------------------------------------------------------------
+ path             : etype       dtype           info
+--------------------------------------------------------------------------------
+ .                : File                        c=3, a=2
+     dataset_name : attr        str             v=testing
+     n_samples    : attr        int32           v=10
+ labels           : Dataset     int32           s=(10,)
+ labels_map       : Group                       c=0, a=1
+     right        : attr        int32           v=0
+ spectrograms     : Dataset     float32         s=(10, 1000, 65)
+```
 
 
 # future plans:

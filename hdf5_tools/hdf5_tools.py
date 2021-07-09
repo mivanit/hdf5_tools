@@ -261,6 +261,9 @@ def print_info(
             if x.etype in ['Dataset', 'Group']:
                 for a in data[x.path].attrs:
                     attr_path_lengths.append(len(a))
+            elif x.etype == 'File':
+                for a in data.attrs:
+                    attr_path_lengths.append(len(a))
 
         if not attr_path_lengths:
             attr_path_lengths = [0]
@@ -315,6 +318,10 @@ def print_info(
         # print attributes, if requested
         if print_attr and (row.etype in ['Dataset', 'Group']):
             for a_key,a_val in data[row.path].attrs.items():
+                print(FMT_row.format('    ' + a_key, 'attr    ', a_val.__class__.__name__, 'v=' + str(a_val)))
+
+        if print_attr and (row.etype == 'File'):
+            for a_key,a_val in data.attrs.items():
                 print(FMT_row.format('    ' + a_key, 'attr    ', a_val.__class__.__name__, 'v=' + str(a_val)))
 
 
