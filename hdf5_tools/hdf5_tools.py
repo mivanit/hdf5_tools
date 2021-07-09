@@ -233,11 +233,16 @@ def print_info(
             for a_key,a_val in data.attrs.items():
                 print('{:<20}'.format(a_key) + FMT_row_suf.format('attr    ', a_val.__class__.__name__, a_val))
             print('-'*30)
-            print('shape = %s' % str(data.shape))
-            print('dtype = %s' % str(data.dtype))
+            print(f'shape : {data.shape}')
+            print(f'dtype : {data.dtype}')
             print('='*30)
 
-        print(np.array(data))
+        data_ndarr = np.array(data)
+        if data_ndarr.ndim == 0:
+            print(str(np.array(data)).replace('\\n', '\n'))
+        else:
+            print(data_ndarr)
+
         return
 
     # get all relevant rows
