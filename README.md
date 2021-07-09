@@ -9,6 +9,7 @@ do `python h5view.py -h` for help
 ### Usage:
 ```bash
 	python simple_display.py <filename> [-a] [-d=<depth>] [-p=<path>] [-m=<map_path>]
+```
 
  - `-h` : print this help message and exit (can be anywhere)
  - `filename` : hdf5 file to open
@@ -30,7 +31,7 @@ then prints table with columns:
 	- c : number of first order children (Groups)
 	- a : number of attributes (Groups)
 	- v : element value (attribute)
-```
+
 
 ### Examples:
 ```bash
