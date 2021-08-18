@@ -205,7 +205,7 @@ def load_dataset(data_path : DataSetPath) -> np.ndarray:
 # FMT_row = '{:<29} : ' + '{:<8}' + '{:<16}' + '{:<16}'
 # FMT_attr = '    {:<25} : ' + 'attr    ' + '{:<16}' + '{}' 
 
-FMT_row_suf = ': ' + '{:<12}' + '{:<16}' + '{:<16}'
+FMT_row_suf = ': {:<10}{:<10}{:<16}'
 
 # nonestr = lambda x : str(x)
 # nonestr = lambda x : ' ' if ((x is None) or (x == 'None' if isinstance(x,str) else True)) else str(x)
@@ -220,6 +220,39 @@ def print_info(
         output : Optional[File] = None,
         map_dtypes_path : Optional[str] = None,
     ):
+    """nicely prints info about h5py data
+    
+    first prints datatype legend (if -m specified), surrounded by '=' hrules
+
+    then prints table with columns:
+    - 'path'  : path of object inside hdf5 file
+    - 'etype' : the element type (usually a group, dataset, or attribute)
+                note that attributes are printed below their parent group
+    - 'dtype' : datatype, if element is a dataset or attribute
+    - 'info'  : random info, depends on the element type
+        - v : element value (attribute) (ommitted)
+        - s : shape (Datasets)
+        - c : number of first order children (Groups)
+        - a : number of attributes (Groups)
+    
+    ### Parameters:
+     - `group : h5py.Group`   
+     - `path : Optional[str]`   
+       (defaults to `None`)
+     - `depth : int`   
+       (defaults to `64`)
+     - `print_groups : bool`   
+       (defaults to `True`)
+     - `print_attr : bool`   
+       (defaults to `False`)
+     - `output : Optional[File]`   
+       (defaults to `None`)
+     - `map_dtypes_path : Optional[str]`   
+       (defaults to `None`)
+    
+    ### Raises:
+     - `KeyError` : when a path inside the dataset is invalid
+    """
 
     # if a path is given, go to that path
     if path is not None:
@@ -323,11 +356,11 @@ def print_info(
         # print attributes, if requested
         if print_attr and (row.etype in ['Dataset', 'Group']):
             for a_key,a_val in data[row.path].attrs.items():
-                print(FMT_row.format('    ' + a_key, 'attr    ', a_val.__class__.__name__, 'v=' + str(a_val)))
+                print(FMT_row.format('    ' + a_key, 'attr    ', a_val.__class__.__name__, str(a_val)))
 
         if print_attr and (row.etype == 'File'):
             for a_key,a_val in data.attrs.items():
-                print(FMT_row.format('    ' + a_key, 'attr    ', a_val.__class__.__name__, 'v=' + str(a_val)))
+                print(FMT_row.format('    ' + a_key, 'attr    ', a_val.__class__.__name__, str(a_val)))
 
 
 

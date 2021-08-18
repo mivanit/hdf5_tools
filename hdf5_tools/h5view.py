@@ -18,11 +18,10 @@ then prints table with columns:
                note that attributes are printed below their parent group
  - 'dtype' : datatype, if element is a dataset or attribute
  - 'info'  : random info, depends on the element type
+	- v : element value (attribute) (ommitted)
 	- s : shape (Datasets)
 	- c : number of first order children (Groups)
 	- a : number of attributes (Groups)
-	- v : element value (attribute)
-
 
 """
 
